@@ -5,8 +5,8 @@ __pycache__/
 images/
 media/
 
-001_initial.py
-0002_catagory_image.py
+0001_initial.py
+0002_category_image.py
 0003_order_notes_order_payment_method_and_more.py
 
 ecommerce django.zip
