@@ -1,0 +1,167 @@
+<!-- templates/checkout.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'cart_view' %}">Cart</a></li>
+                    <li class="breadcrumb-item active">Checkout</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h2>Checkout</h2>
+        </div>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-8">
+                <!-- Shipping Information -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Shipping Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">First Name *</label>
+                                <input type="text" class="form-control" id="firstName" name="first_name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Last Name *</label>
+                                <input type="text" class="form-control" id="lastName" name="last_name" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address *</label>
+                            <input type="text" class="form-control" id="address" name="address" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="city" class="form-label">City *</label>
+                                <input type="text" class="form-control" id="city" name="city" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="state" class="form-label">State/Province *</label>
+                                <select class="form-select" id="state" name="state" required>
+                                    <option value="">Choose...</option>
+                                    <option value="bagmati">Bagmati</option>
+                                    <option value="gandaki">Gandaki</option>
+                                    <option value="lumbini">Lumbini</option>
+                                    <option value="karnali">Karnali</option>
+                                    <option value="sudurpashchim">Sudurpashchim</option>
+                                    <option value="province1">Koshi</option>
+                                    <option value="madhesh">Madhesh</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="zip" class="form-label">Zip Code *</label>
+                                <input type="text" class="form-control" id="zip" name="zip" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Phone Number *</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Payment Method</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            We currently accept Cash on Delivery for all orders.
+                        </div>
+                        
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_method" id="cod" value="cod" checked>
+                            <label class="form-check-label" for="cod">
+                                <strong>Cash on Delivery (COD)</strong>
+                            </label>
+                        </div>
+                        
+                        <div class="mt-3 p-3 bg-light rounded">
+                            <h6><i class="fas fa-money-bill-wave me-2"></i>How Cash on Delivery works:</h6>
+                            <ul class="mb-0">
+                                <li>Pay when you receive your order</li>
+                                <li>No advance payment required</li>
+                                <li>Available for all locations in Nepal</li>
+                                <li>Delivery within 3-5 business days</li>
+                            </ul>
+                        </div>
+
+                        <!-- Additional Notes -->
+                        <div class="mb-3 mt-3">
+                            <label for="notes" class="form-label">Additional Notes (Optional)</label>
+                            <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Any special delivery instructions..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Order Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for item in cart_items %}
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>{{ item.product.name }} (x{{ item.quantity }})</span>
+                            <span>NPR {{ item.total|floatformat:2 }}</span>
+                        </div>
+                        {% endfor %}
+                        <hr>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal:</span>
+                            <span>NPR {{ total_price|floatformat:2 }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Shipping:</span>
+                            <span>NPR {{ shipping|floatformat:2 }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Tax (13%):</span>
+                            <span>NPR {{ tax_amount|floatformat:2 }}</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-3">
+                            <strong>Total:</strong>
+                            <strong>NPR {{ grand_total|floatformat:2 }}</strong>
+                        </div>
+                        
+                        <div class="alert alert-warning small">
+                            <i class="fas fa-exclamation-triangle me-1"></i>
+                            Please ensure your shipping information is correct.
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100 btn-lg">
+                            <i class="fas fa-truck me-2"></i>Place Order (Cash on Delivery)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+<!-- templates/product_detail.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'product_list' %}">Products</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'product_list_by_category' product.category.slug %}">{{ product.category.name }}</a></li>
+                    <li class="breadcrumb-item active">{{ product.name }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.name }}">
+        </div>
+        <div class="col-md-6">
+            <span class="badge category-badge mb-2">{{ product.category.name }}</span>
+            <h2>{{ product.name }}</h2>
+            <p class="text-muted">Product Code: {{ product.id }}</p>
+            <h3 class="text-primary">NPR {{ product.price }}</h3>
+            
+            {% if product.stock > 0 %}
+            <p class="text-success"><i class="fas fa-check-circle"></i> In Stock ({{ product.stock }} available)</p>
+            {% else %}
+            <p class="text-danger"><i class="fas fa-times-circle"></i> Out of Stock</p>
+            {% endif %}
+            
+            <div>{{ product.description|safe }}</div>
+            
+            {% if product.stock > 0 %}
+            <form action="{% url 'add_to_cart' product.id %}" method="post">
+                {% csrf_token %}  <!-- ADD THIS LINE -->
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label for="quantity" class="form-label">Quantity:</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" value="1" min="1" max="{{ product.stock }}">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

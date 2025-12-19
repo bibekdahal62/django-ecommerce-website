@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Authentic Nepali Clothing</h1>
+        <p class="lead">Discover our collection of traditional and modern clothing from the heart of Nepal.</p>
+        <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg">Shop Now</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h2 class="mb-4">Featured Products</h2>
+        </div>
+        {% for product in featured_products %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body">
+                    <span class="badge category-badge mb-2">{{ product.category.name }}</span>
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">NPR {{ product.price }}</p>
+                    <a href="{% url 'product_detail' product.id product.slug %}" class="btn btn-outline-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h2 class="mb-4">Shop by Category</h2>
+        </div>
+        {% for category in categories %}
+        <div class="col-md-4 mb-4">
+            <div class="card text-bg-dark">
+                {% if category.image and category.image.url %}
+                <img src="{{ category.image.url }}" class="card-img" alt="{{ category.name }}">
+                {% else %}
+                <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="card-img" alt="{{ category.name }}">
+                {% endif %}
+                <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                    <div class="text-center">
+                        <h3 class="card-title">{{ category.name }}</h3>
+                        <a href="{% url 'product_list_by_category' category.slug %}" class="btn btn-primary">Browse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row bg-light py-5 rounded">
+        <div class="col-md-6">
+            <h2>About NepalCloth</h2>
+            <p>We specialize in bringing you the finest clothing from Nepal, combining traditional craftsmanship with modern designs. Each piece tells a story of Nepali culture and heritage.</p>
+            <p>Our products are sourced directly from local artisans, ensuring fair trade and supporting Nepal's economy.</p>
+            <a href="{% url 'about_us' %}" class="btn btn-primary">Learn More</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

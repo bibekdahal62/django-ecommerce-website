@@ -1,0 +1,143 @@
+<!-- templates/about_us.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <!-- Breadcrumb -->
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                    <li class="breadcrumb-item active">About Us</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h1 class="display-4 fw-bold text-primary">About NepalCloth</h1>
+            <p class="lead">Preserving Tradition, Embracing Modernity</p>
+        </div>
+    </div>
+
+    <!-- Our Story -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-md-6">
+            <img src="C:\Users\bibek\OneDrive\Desktop\ecommerce django project\nepal_clothing_store\images\about-us.jpg"
+                 class="img-fluid rounded shadow" alt="Nepali Traditional Clothing">
+        </div>
+        <div class="col-md-6">
+            <h2 class="mb-4">Our Story</h2>
+            <p class="lead">Founded in 2023, NepalCloth emerged from a deep passion for Nepali culture and craftsmanship.</p>
+            <p>We started as a small initiative to promote authentic Nepali clothing and have grown into a trusted platform connecting local artisans with fashion enthusiasts worldwide.</p>
+            <p>Our journey began in the heart of Kathmandu, where we witnessed the incredible skill of local weavers and artisans creating beautiful traditional garments.</p>
+        </div>
+    </div>
+
+    <!-- Mission & Vision -->
+    <div class="row mb-5">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="fas fa-bullseye fa-3x text-primary"></i>
+                    </div>
+                    <h3 class="card-title">Our Mission</h3>
+                    <p class="card-text">To preserve and promote Nepali textile heritage while providing sustainable livelihood opportunities for local artisans through fair trade practices.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <i class="fas fa-eye fa-3x text-primary"></i>
+                    </div>
+                    <h3 class="card-title">Our Vision</h3>
+                    <p class="card-text">To become the global gateway for authentic Nepali clothing, making traditional craftsmanship accessible to everyone while maintaining cultural integrity.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What We Offer -->
+    <div class="row mb-5">
+        <div class="col-12 text-center mb-4">
+            <h2>What We Offer</h2>
+            <p class="lead">A diverse collection of authentic Nepali clothing</p>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="text-center">
+                <i class="fas fa-tshirt fa-2x text-primary mb-2"></i>
+                <h5>Traditional Wear</h5>
+                <p>Authentic Daura Suruwal, Dhaka Topi, and traditional women's attire</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="text-center">
+                <i class="fas fa-user-tie fa-2x text-primary mb-2"></i>
+                <h5>Modern Fusion</h5>
+                <p>Contemporary designs inspired by traditional Nepali patterns</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="text-center">
+                <i class="fas fa-gem fa-2x text-primary mb-2"></i>
+                <h5>Handicrafts</h5>
+                <p>Pashmina shawls, Lokta paper products, and traditional accessories</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Values -->
+    <div class="row mb-5 bg-light py-5 rounded">
+        <div class="col-12 text-center mb-4">
+            <h2>Our Values</h2>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="text-center">
+                <i class="fas fa-hands-helping fa-2x text-primary mb-2"></i>
+                <h6>Fair Trade</h6>
+                <small>Ensuring artisans receive fair compensation for their work</small>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="text-center">
+                <i class="fas fa-leaf fa-2x text-primary mb-2"></i>
+                <h6>Sustainability</h6>
+                <small>Using eco-friendly materials and sustainable practices</small>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="text-center">
+                <i class="fas fa-award fa-2x text-primary mb-2"></i>
+                <h6>Quality</h6>
+                <small>Handcrafted products with attention to detail</small>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="text-center">
+                <i class="fas fa-heart fa-2x text-primary mb-2"></i>
+                <h6>Authenticity</h6>
+                <small>Genuine Nepali craftsmanship and designs</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="card bg-primary text-white">
+                <div class="card-body py-5">
+                    <h3 class="card-title">Join Our Journey</h3>
+                    <p class="card-text">Be part of preserving Nepali culture while embracing beautiful traditional clothing.</p>
+                    <a href="{% url 'product_list' %}" class="btn btn-light btn-lg">Explore Our Collection</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
